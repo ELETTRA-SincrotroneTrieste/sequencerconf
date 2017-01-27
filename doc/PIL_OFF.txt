@@ -1,0 +1,4 @@
+step1;command(pil/laser/evops_pil.01/Off) && sleep(1) && goto(2);Switching OFF Amplifier First Evolution(15);Error Switching OFF Amplifier First Evolution(15);3000
+step2;command(pil/laser/evops_pil.02/Off) && sleep(1) && goto(3);Switching OFF Amplifier Second Evolution(HE1);Error Switching OFF Amplifier Second Evolution(HE1);3000
+step3;command(pil/laser/evops_pil.03/Off) && sleep(1) && goto(4);Switching OFF Amplifier Third Evolution(HE2);Error Switching OFF Amplifier Third Evolution(HE2);3000
+step4;command(pil/timing/tmu_pil.01/Unlock) && sleep(1) && goto(5);UnLocking Oscillator;Error unlocking Oscillator;3000

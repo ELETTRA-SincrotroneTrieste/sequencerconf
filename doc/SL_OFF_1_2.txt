@@ -1,0 +1,4 @@
+step1;command(sl/laser/evops_sl.01/Off) && sleep(1) && goto(2); Switching OFF Amplifier1 First Evolution(30-1); Error Switching OFF Amplifier1 First Evolution(30-1);3000
+step2;command(sl/laser/evops_sl.02/Off) && sleep(1) && goto(3); Switching OFF Amplifier1 Second Evolution(30-2); Error Switching OFF Amplifier1 Second Evolution(30-2);3000
+step3;command(sl/laser/evops_sl.03/Off) && sleep(1) && goto(4); Switching OFF Amplifier2 Evolution(Revo); Error Switching OFF Amplifier2 Evolution(Revo);3000
+step4;command(sl/timing/tmu_sl.01/Unlock) && sleep(1) && goto(5); Unlocking Oscillator; Error Unlocking Oscillator;3000

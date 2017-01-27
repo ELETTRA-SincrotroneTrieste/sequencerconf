@@ -1,0 +1,3 @@
+step1;(write(sl/laser/evops_sl.01/Current) = 10) && sleep(1) && goto(2);Lowering Amplifier1 First Evolution Current(30-1);Error Lowering Amplifier1 First Evolution Current(30-1);3000
+step2;(write(sl/laser/evops_sl.02/Current) = 10) && sleep(1) && goto(3);Lowering Amplifier1 Second Evolution Current(30-2);Error Lowering Amplifier1 Second Evolution Current(30-2);3000
+step3;(write(sl/laser/evops_sl.03/Current) = 10) && sleep(1) && goto(4);Lowering Amplifier2 Evolution Current(Revo);Error Lowering Amplifier2 Evolution Current(Revo);3000

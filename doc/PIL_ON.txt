@@ -1,0 +1,10 @@
+step1;read(pil/misc/ranges/On_Condition) == 1 ? sleep(1) && goto(2) : goto(-1);Checking Temperature, Trigger, Spectrum PreCondition;Temperature, Trigger or Spectrum NOT OK;3000
+step2;read(pil/laser/pslver_pil.01/State) == ON ? sleep(2) && goto(3) : command(pil/laser/pslver_pil.01/On) && sleep(35) && goto(3);Switching ON Verdi;Error Switching ON Verdi;40000
+step3;(command(pil/laser/pslver_pil.01/SendCommand) = 'S=1') && sleep(1) && goto(4);Opening Verdi Shutter;Error Opening Verdi Shutter;30000
+step4;read(pil/laser/spctm_analysis_pil.01/State) == RUNNING ? sleep(1) && goto(5) : goto(-1);Checking Oscillator Spectrum;Oscillator Spectrum NOT OK;3000
+step5;command(pil/timing/tmu_pil.01/Lock) && sleep(1) && goto(6);Locking Oscillator;Error locking Oscillator;3000
+step6;read(pil/laser/evops_pil.01/State) == OFF ?((write(pil/laser/evops_pil.01/Current) = read(pil/misc/ranges/evops_pil_01_Current_set)) && command(pil/laser/evops_pil.01/Run) && sleep(1) && goto(7)) : (command(pil/laser/evops_pil.01/Off) && sleep(1) && goto(6));Checking Amplifier First Evolution(15);Error Amplifier First Evolution(15);9000
+step7;read(pil/laser/evops_pil.02/State) == OFF ?((write(pil/laser/evops_pil.02/Current) = read(pil/misc/ranges/evops_pil_02_Current_set)) && command(pil/laser/evops_pil.02/Run) && sleep(1) && goto(8)) : (command(pil/laser/evops_pil.02/Off) && sleep(1) && goto(7));Checking Amplifier Second Evolution(HE1);Error Amplifier Second Evolution(HE1);9000
+step8;read(pil/laser/evops_pil.03/State) == OFF ?((write(pil/laser/evops_pil.03/Current) = read(pil/misc/ranges/evops_pil_03_Current_set)) && command(pil/laser/evops_pil.03/Run) && sleep(1) && goto(9)) : (command(pil/laser/evops_pil.03/Off) && sleep(1) && goto(8));Checking Amplifier Third Evolution(HE2);Error Amplifier Third Evolution(HE2);9000
+step9;command(pil/delay/sdg_pil.01/ResetBwd) && sleep(1) && goto(10);Reset Amplifier Bandwidth Interlock Detector;Error Reseting Amplifier Bandwidth Interlock Detector;3000
+#ultimo step controllo locking per segnalare errore se non locked
