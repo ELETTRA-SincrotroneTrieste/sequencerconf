@@ -1,5 +1,5 @@
 /*----- PROTECTED REGION ID(SequencerConf.cpp) ENABLED START -----*/
-static const char *RcsId = "$Id: SequencerConf.cpp,v 1.5 2015-01-26 10:03:54 graziano Exp $";
+static const char *RcsId = "$Id: SequencerConf.cpp,v 1.7 2017-04-28 10:00:11 graziano Exp $";
 //=============================================================================
 //
 // file :        SequencerConf.cpp
@@ -14,8 +14,8 @@ static const char *RcsId = "$Id: SequencerConf.cpp,v 1.5 2015-01-26 10:03:54 gra
 //
 // $Author: graziano $
 //
-// $Revision: 1.5 $
-// $Date: 2015-01-26 10:03:54 $
+// $Revision: 1.7 $
+// $Date: 2017-04-28 10:00:11 $
 //
 // SVN only:
 // $HeadURL:  $
@@ -23,6 +23,12 @@ static const char *RcsId = "$Id: SequencerConf.cpp,v 1.5 2015-01-26 10:03:54 gra
 // CVS only:
 // $Source: /home/cvsadm/cvsroot/fermi/servers/sequencerconf/src/SequencerConf.cpp,v $
 // $Log: SequencerConf.cpp,v $
+// Revision 1.7  2017-04-28 10:00:11  graziano
+// fixed string equality
+//
+// Revision 1.6  2017-04-28 07:30:38  graziano
+// fixed string
+//
 // Revision 1.5  2015-01-26 10:03:54  graziano
 // fixed
 //
@@ -2298,7 +2304,7 @@ void SequencerConf::eval_func_tango(iter_t const& i, string attr_name, string &a
 				DEBUG_STREAM << "		node Tango function: going to write(" << it_ev->remote_attr_name << ") val=" << string(i2_2->value.begin(), i2_2->value.end()) << endl;
 
 				//TODO: array
-		        string val_st(i2_2->value.begin(), i2_2->value.end());
+		        string val_st(i2_2->value.begin()+1, i2_2->value.end()-1);
 				vector<double> vval;
 				vector<string> ss;
 				ss.push_back(val_st);
@@ -2424,7 +2430,7 @@ void SequencerConf::eval_func_tango(iter_t const& i, string attr_name, string &a
 			}
 			else if(i2_2->value.id() == formula_grammar::val_stringID)
 			{
-		        string val_st(i2_2->value.begin(), i2_2->value.end());
+		        string val_st(i2_2->value.begin()+1, i2_2->value.end()-1);//TODO: check string
 				Tango::DeviceData Din;
 				Din << val_st;
 				it_ev->remote_device->command_inout(it_ev->remote_attr_name,Din);
